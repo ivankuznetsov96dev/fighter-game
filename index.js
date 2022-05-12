@@ -25,6 +25,7 @@ class Sprite {
     };
     this.color = color;
     this.isAttacking = false;
+    this.health = 100;
   }
 
   draw() {
@@ -48,14 +49,18 @@ class Sprite {
     }
   }
 
+  updateAttackCollision() {
+    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+    this.attackBox.position.y = this.position.y;
+  }
+
   update() {
     this.draw();
 
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
-    this.attackBox.position.y = this.position.y;
-
+    this.updateAttackCollision();
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+    this.updateAttackCollision();
 
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
       this.velocity.y = 0;
@@ -166,7 +171,8 @@ function animate() {
     player.isAttacking
   ) {
     player.isAttacking = false;
-    console.log("player hit");
+    enemy.health -= 20;
+    document.querySelector("#enemyHealth").style.width = `${enemy.health}%`;
   }
 
   if (
@@ -174,7 +180,8 @@ function animate() {
     enemy.isAttacking
   ) {
     enemy.isAttacking = false;
-    console.log("enemy hit");
+    player.health -= 20;
+    document.querySelector("#playerHealth").style.width = `${player.health}%`;
   }
 }
 
