@@ -27,6 +27,9 @@
     width: 100px;
     height: 100px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-health-wrapper, .enemy-health-wrapper {
@@ -54,4 +57,16 @@
 
 .player-lost-health {
     width: 100%;
+}
+
+.fight-result-text {
+    position: absolute;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
